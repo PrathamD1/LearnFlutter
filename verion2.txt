@@ -1,3 +1,0 @@
-In this particular version, these are the things that we learnt.
-a. Stateful widget, write stful to auto generate a Stateful widget
-b. We are trying to display whatever is written inside an input feild immediately onto a text widget.
