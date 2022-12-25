@@ -15,18 +15,27 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Prathams App',
       theme: ThemeData(
-        primarySwatch: Colors.green,
+        primarySwatch: Colors.red,
       ),
       home: MyHomePage(),
     );
   }
 }
 
-class MyHomePage extends StatelessWidget {
+class MyHomePage extends StatefulWidget {
+  const MyHomePage({super.key});
+  @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  String text = "";
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: Text("Hello World!")), body: TextInputWidget());
+        appBar: AppBar(title: Text("Hello World!")),
+        body: Column(children: <Widget>[TextInputWidget(), Text(this.text)]));
   }
 }
 
@@ -54,29 +63,21 @@ class _TextInputWidgetState extends State<TextInputWidget> {
     controller.dispose();
   }
 
-  void changeText(text) {
-    if (text == "Hello World!") {
-      controller.clear();
-      text = "";
-    }
-
-    setState(() {
-      this.text = text;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     // ignore: prefer_const_literals_to_create_immutables
     return Column(children: <Widget>[
       TextField(
-        controller: this.controller,
-        decoration: InputDecoration(
-            prefixIcon: Icon(Icons.messenger),
-            labelText: "Please enter a message"),
-        onChanged: (text) => this.changeText(text),
-      ),
-      Text(this.text)
+          controller: this.controller,
+          decoration: InputDecoration(
+              prefixIcon: Icon(Icons.messenger),
+              labelText: "Please enter a message",
+              suffix: IconButton(
+                icon: Icon(Icons.send),
+                splashColor: Colors.blueAccent,
+                tooltip: "Post message",
+                onPressed: () => {},
+              ))),
     ]);
   }
 }
